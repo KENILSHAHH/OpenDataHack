@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Blockies from "react-blockies";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { isAddress } from "viem";
 import { useEnsAvatar, useEnsName } from "wagmi";
 import { hardhat } from "wagmi/chains";
 import { CheckCircleIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
-import { BlockieAvatar } from "~~/components/scaffold-eth";
 import { getBlockExplorerAddressLink, getTargetNetwork } from "~~/utils/scaffold-eth";
 
 type TAddressProps = {
@@ -33,11 +33,11 @@ export const Address = ({ address, disableAddressLink, format, size = "base" }: 
   const [ensAvatar, setEnsAvatar] = useState<string | null>();
   const [addressCopied, setAddressCopied] = useState(false);
 
-  const { data: fetchedEns } = useEnsName({ address, enabled: isAddress(address ?? ""), chainId: 1 });
+  const { data: fetchedEns } = useEnsName({ address, enabled: isAddress(address ?? ""), chainId: 5 });
   const { data: fetchedEnsAvatar } = useEnsAvatar({
     name: fetchedEns,
     enabled: Boolean(fetchedEns),
-    chainId: 1,
+    chainId: 5,
     cacheTime: 30_000,
   });
 
@@ -67,7 +67,7 @@ export const Address = ({ address, disableAddressLink, format, size = "base" }: 
   }
 
   const blockExplorerAddressLink = getBlockExplorerAddressLink(getTargetNetwork(), address);
-  let displayAddress = address?.slice(0, 5) + "..." + address?.slice(-4);
+  let displayAddress = address?.slice(0, 5) + ".." + address?.slice(-4);
 
   if (ens) {
     displayAddress = ens;
@@ -78,11 +78,24 @@ export const Address = ({ address, disableAddressLink, format, size = "base" }: 
   return (
     <div className="flex items-center">
       <div className="flex-shrink-0">
-        <BlockieAvatar
-          address={address}
-          ensImage={ensAvatar}
-          size={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
-        />
+        {ensAvatar ? (
+          // Don't want to use nextJS Image here (and adding remote patterns for the URL)
+          // eslint-disable-next-line
+          <img
+            className="rounded-full"
+            src={ensAvatar}
+            width={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
+            height={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
+            alt={`${address} avatar`}
+          />
+        ) : (
+          <Blockies
+            className="mx-auto rounded-full"
+            size={blockieSizeMap[size]}
+            seed={address.toLowerCase()}
+            scale={3}
+          />
+        )}
       </div>
       {disableAddressLink ? (
         <span className={`ml-1.5 text-${size} font-normal`}>{displayAddress}</span>

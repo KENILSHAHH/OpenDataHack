@@ -61,14 +61,12 @@ export const ReadOnlyFunctionForm = ({ contractAddress, abiFunction }: TReadOnly
           )}
         </div>
         <button
-          className="btn btn-secondary btn-sm"
+          className={`btn btn-secondary btn-sm ${isFetching ? "loading" : ""}`}
           onClick={async () => {
             const { data } = await refetch();
             setResult(data);
           }}
-          disabled={isFetching}
         >
-          {isFetching && <span className="loading loading-spinner loading-xs"></span>}
           Read 📡
         </button>
       </div>
