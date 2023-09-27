@@ -2,7 +2,6 @@
 pragma solidity 0.8.18;
 
 contract Preference  {
- 
     address primary;
     struct User{
         address primaryAddress;
@@ -47,7 +46,8 @@ contract Preference  {
             user.tokenPreference
         );
     }
-    function getPrimaryAddress(address secondary)  public view returns (address){
+    function getPrimaryAddress(address secondary)  public view returns (address)
+    {
          User storage user = users[msg.sender];
             if (user.primaryAddress == secondary) {
             return secondary; // The provided secondary address is the primary address
