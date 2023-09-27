@@ -6,7 +6,6 @@ import { Bars3Icon, BugAntIcon, MagnifyingGlassIcon, SparklesIcon } from "@heroi
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
-
 interface PageProps {
   childComponent: React.ReactNode;
 }
@@ -45,28 +44,22 @@ export const Header = () => {
         <NavLink href="/">Home</NavLink>
       </li>
       <li>
-        <NavLink href="/daos">
+        <NavLink href="/preferences">
           <BugAntIcon className="h-4 w-4" />
-          Available DAOs
-        </NavLink>
-      </li>
-       <li>
-        <NavLink href="/joinDao">
-          <SparklesIcon className="h-4 w-4" />
-          
-        </NavLink>
-      </li>
-     
-      <li>
-        <NavLink href="/create">
-          <SparklesIcon className="h-4 w-4" />
-         Create Entry Restricted DAO
+          Set my Preferences
         </NavLink>
       </li>
       <li>
-        <NavLink href="/sort">
-          <MagnifyingGlassIcon className="h-4 w-4" />
-         Dao Transactions
+        <NavLink href="/sendAssets">
+          <SparklesIcon className="h-4 w-4" />
+          Send Assets
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink href="/sendNFTs">
+          <SparklesIcon className="h-4 w-4" />
+          Send Nfts
         </NavLink>
       </li>
     </>
