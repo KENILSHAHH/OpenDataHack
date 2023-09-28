@@ -1,4 +1,4 @@
-# 🏗 SpruceDAO
+# 🏗 MyNFTMyChain
 
 #This project is Scaffolded using ScaffoldETH2
 
