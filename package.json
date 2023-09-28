@@ -46,6 +46,7 @@
     "@spruceid/ssx-server": "^2.0.0",
     "@unioncredit/v1-sdk": "^1.0.0",
     "@unioncredit/v2-sdk": "^1.0.0",
+    "nft.storage": "^7.1.1",
     "react": "^18.2.0"
   }
 }
