@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity ^0.8.18;
 
 import { LinkTokenInterface } from "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import { IRouterClient } from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
@@ -33,11 +33,12 @@ contract SourceMinter is Withdraw {
 	function mint(
 		uint64 destinationChainSelector,
 		address receiver,
-		PayFeesIn payFeesIn
+		PayFeesIn payFeesIn,
+		address receiving
 	) external {
 		Client.EVM2AnyMessage memory message = Client.EVM2AnyMessage({
 			receiver: abi.encode(receiver),
-			data: abi.encodeWithSignature("mint(address)", msg.sender),
+			data: abi.encodeWithSignature("mint(address)", receiving),
 			tokenAmounts: new Client.EVMTokenAmount[](0),
 			extraArgs: "",
 			feeToken: payFeesIn == PayFeesIn.LINK ? i_link : address(0)
