@@ -1,5 +1,13 @@
 # 🏗 MyNFTMyChain
 
+Its really hard to manage all the NFTs, SBTs, POAPs which you receive it on several chains and several address. You would have remember every time when someone sends you an NFT and note down the chain as well as the address on which you received it
+
+
+Well MyNFTMyChain solves this issue where in the Community/DAOs/anyone can send the NFTs to the other users on their preferred chain as well as preferred addresses.
+
+
+
+
 #This project is Scaffolded using ScaffoldETH2
 
 SourceMinter Contract Deployed on Sepolia Testnet at 0x03E6110BbD3FEE7709D108CfAbf8b0476ef38462
