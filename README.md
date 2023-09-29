@@ -14,6 +14,7 @@ We have four main contracts to interact with.
 
 
 #This project is Scaffolded using ScaffoldETH2
+Chainlink CCIP transaction https://ccip.chain.link/msg/0xa480cfa6e909c048e08362b2ddd446c8100bec7f643fea570bb0a916a24e9703
 
 SourceMinter Contract Deployed on Sepolia Testnet at 0xD81cf3CbF8B7554208146451A3219c29534D80cA
 
