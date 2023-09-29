@@ -1,10 +1,15 @@
 # 🏗 MyNFTMyChain
 
 Its really hard to manage all the NFTs, SBTs, POAPs which you receive it on several chains and several address. You would have remember every time when someone sends you an NFT and note down the chain as well as the address on which you received it
-
-
 Well MyNFTMyChain solves this issue where in the Community/DAOs/anyone can send the NFTs to the other users on their preferred chain as well as preferred addresses.
 
+How are we doing it?
+
+We have four main contracts to interact with.
+1) Preference.sol -> This saves the user's preference on chain deployed on FVM Calibration testnet 0x5d23c6bfB54b76511dE38a3c5770306620f35074
+2) SourceMinter.sol -> This helps the sender to pass a message from his/her desired chain to the destination chain which mints an NFT
+3) MyNFT.sol -> ERC721 contract
+4) Destination.sol -> This contract receives a message from the sopurce chain to mint an NFT
 
 
 
