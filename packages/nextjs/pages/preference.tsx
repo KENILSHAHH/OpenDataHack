@@ -7,131 +7,130 @@ import Web3Modal from "web3modal";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 
 const preferenceAbi = [
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_primaryAddress",
-        type: "address",
-      },
-      {
-        internalType: "address[]",
-        name: "_secondaryAddresses",
-        type: "address[]",
-      },
-      {
-        internalType: "string",
-        name: "_chainPreference",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_tokenPreference",
-        type: "string",
-      },
-    ],
-    name: "registerUser",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "userAddress",
-        type: "address",
-      },
-    ],
-    name: "UserRegistered",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "secondary",
-        type: "address",
-      },
-    ],
-    name: "getPrimaryAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_userAddress",
-        type: "address",
-      },
-    ],
-    name: "getUserPreferences",
-    outputs: [
-      {
-        internalType: "address",
-        name: "primaryAddress",
-        type: "address",
-      },
-      {
-        internalType: "address[]",
-        name: "secondaryAddresses",
-        type: "address[]",
-      },
-      {
-        internalType: "string",
-        name: "chainPreference",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "tokenPreference",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "users",
-    outputs: [
-      {
-        internalType: "address",
-        name: "primaryAddress",
-        type: "address",
-      },
-      {
-        internalType: "string",
-        name: "chainPreference",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "tokenPreference",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-];
-
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_primaryAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "address[]",
+				"name": "_secondaryAddresses",
+				"type": "address[]"
+			},
+			{
+				"internalType": "string",
+				"name": "_chainPreference",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_tokenPreference",
+				"type": "string"
+			}
+		],
+		"name": "registerUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "userAddress",
+				"type": "address"
+			}
+		],
+		"name": "UserRegistered",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "secondary",
+				"type": "address"
+			}
+		],
+		"name": "getPrimaryAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_userAddress",
+				"type": "address"
+			}
+		],
+		"name": "getUserPreferences",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "primaryAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "address[]",
+				"name": "secondaryAddresses",
+				"type": "address[]"
+			},
+			{
+				"internalType": "string",
+				"name": "chainPreference",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tokenPreference",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "users",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "primaryAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "chainPreference",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tokenPreference",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
 export default function Create() {
   const [inputs, setInputs] = useState([""]);
 
@@ -172,7 +171,7 @@ export default function Create() {
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = await provider.getSigner();
-    const contract = new ethers.Contract("0x72a7C1F2B4e0D8d09014AE9E8d86F18c71c55d60", preferenceAbi, signer);
+    const contract = new ethers.Contract("0x5d23c6bfB54b76511dE38a3c5770306620f35074", preferenceAbi, signer);
     const txn = await contract.registerUser(nameData.daoName, inputs, selectedOption, selectedCurrency);
     await txn.wait();
     console.log(txn);

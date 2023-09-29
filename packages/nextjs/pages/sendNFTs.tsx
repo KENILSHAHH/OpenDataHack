@@ -6,7 +6,7 @@ import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 const NFT_STORAGE_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkwOUYwN0M4Yjc2ODBBNDZkN0Q0ZDkwMmUzNjcyRDZmMzc3RTZjNzQiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY5NTU1NDIwNDkyOCwibmFtZSI6Ik9wZW5EYXRhSGFjayJ9.dSwxOQqrrFNGdaoO39NlcIK4G9fSoRKkgaxBrzrA_eg'
 const client = new NFTStorage({ token: NFT_STORAGE_TOKEN })
-const nftAbi = [
+const nftAbi =[
 	{
 		"inputs": [
 			{
@@ -74,6 +74,24 @@ const nftAbi = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -106,6 +124,24 @@ const nftAbi = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "tokenURI",
+				"type": "string"
+			}
+		],
+		"name": "mint",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -123,6 +159,82 @@ const nftAbi = [
 		],
 		"name": "OwnershipTransferred",
 		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "safeTransferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "data",
+				"type": "bytes"
+			}
+		],
+		"name": "safeTransferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "operator",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "approved",
+				"type": "bool"
+			}
+		],
+		"name": "setApprovalForAll",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -153,6 +265,11 @@ const nftAbi = [
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
 				"name": "to",
 				"type": "address"
 			},
@@ -162,7 +279,20 @@ const nftAbi = [
 				"type": "uint256"
 			}
 		],
-		"name": "approve",
+		"name": "transferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -249,19 +379,6 @@ const nftAbi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			}
-		],
-		"name": "mint",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "name",
 		"outputs": [
@@ -304,95 +421,6 @@ const nftAbi = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "safeTransferFrom",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bytes",
-				"name": "data",
-				"type": "bytes"
-			}
-		],
-		"name": "safeTransferFrom",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "operator",
-				"type": "address"
-			},
-			{
-				"internalType": "bool",
-				"name": "approved",
-				"type": "bool"
-			}
-		],
-		"name": "setApprovalForAll",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "tokenURI",
-				"type": "string"
-			}
-		],
-		"name": "setUri",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -445,45 +473,16 @@ const nftAbi = [
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "transferFrom",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	}
 ]
 const sourceMinterAbi = [
+	{
+		"inputs": [],
+		"name": "acceptOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
 	{
 		"inputs": [
 			{
@@ -535,6 +534,39 @@ const sourceMinterAbi = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint64",
+				"name": "destinationChainSelector",
+				"type": "uint64"
+			},
+			{
+				"internalType": "address",
+				"name": "receiver",
+				"type": "address"
+			},
+			{
+				"internalType": "enum SourceMinter.PayFeesIn",
+				"name": "payFeesIn",
+				"type": "uint8"
+			},
+			{
+				"internalType": "address",
+				"name": "receiving",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "tokenUri",
+				"type": "string"
+			}
+		],
+		"name": "mint",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -571,54 +603,6 @@ const sourceMinterAbi = [
 		],
 		"name": "OwnershipTransferred",
 		"type": "event"
-	},
-	{
-		"inputs": [],
-		"name": "acceptOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint64",
-				"name": "destinationChainSelector",
-				"type": "uint64"
-			},
-			{
-				"internalType": "address",
-				"name": "receiver",
-				"type": "address"
-			},
-			{
-				"internalType": "enum SourceMinter.PayFeesIn",
-				"name": "payFeesIn",
-				"type": "uint8"
-			},
-			{
-				"internalType": "address",
-				"name": "receiving",
-				"type": "address"
-			}
-		],
-		"name": "mint",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
 	},
 	{
 		"inputs": [
@@ -667,142 +651,156 @@ const sourceMinterAbi = [
 	{
 		"stateMutability": "payable",
 		"type": "receive"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	}
-] 
+]
 const preferenceAbi = [
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_primaryAddress",
-        type: "address",
-      },
-      {
-        internalType: "address[]",
-        name: "_secondaryAddresses",
-        type: "address[]",
-      },
-      {
-        internalType: "string",
-        name: "_chainPreference",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_tokenPreference",
-        type: "string",
-      },
-    ],
-    name: "registerUser",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "userAddress",
-        type: "address",
-      },
-    ],
-    name: "UserRegistered",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "secondary",
-        type: "address",
-      },
-    ],
-    name: "getPrimaryAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_userAddress",
-        type: "address",
-      },
-    ],
-    name: "getUserPreferences",
-    outputs: [
-      {
-        internalType: "address",
-        name: "primaryAddress",
-        type: "address",
-      },
-      {
-        internalType: "address[]",
-        name: "secondaryAddresses",
-        type: "address[]",
-      },
-      {
-        internalType: "string",
-        name: "chainPreference",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "tokenPreference",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "users",
-    outputs: [
-      {
-        internalType: "address",
-        name: "primaryAddress",
-        type: "address",
-      },
-      {
-        internalType: "string",
-        name: "chainPreference",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "tokenPreference",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-];
-const preferenceAddress = "0x72a7C1F2B4e0D8d09014AE9E8d86F18c71c55d60";
-const sourceMinterAddress = "0x03E6110BbD3FEE7709D108CfAbf8b0476ef38462"
-const NFTaddress = "0x3ef01CBC562daB2bc50916651517f4DC156f8c7A"
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_primaryAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "address[]",
+				"name": "_secondaryAddresses",
+				"type": "address[]"
+			},
+			{
+				"internalType": "string",
+				"name": "_chainPreference",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_tokenPreference",
+				"type": "string"
+			}
+		],
+		"name": "registerUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "userAddress",
+				"type": "address"
+			}
+		],
+		"name": "UserRegistered",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "secondary",
+				"type": "address"
+			}
+		],
+		"name": "getPrimaryAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_userAddress",
+				"type": "address"
+			}
+		],
+		"name": "getUserPreferences",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "primaryAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "address[]",
+				"name": "secondaryAddresses",
+				"type": "address[]"
+			},
+			{
+				"internalType": "string",
+				"name": "chainPreference",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tokenPreference",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "users",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "primaryAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "chainPreference",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tokenPreference",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+const preferenceAddress = "0x5d23c6bfB54b76511dE38a3c5770306620f35074";
+const sourceMinterAddress = "0xD81cf3CbF8B7554208146451A3219c29534D80cA"
+const NFTaddress = "0x7B690825bBB3f0a5b8410d4596e12e79c62909C0"
 function sendNFTs() {
 	const [enteredAddress, setEnteredAddress] = useState("");
 	const [imageSrc, setImageSrc] = useState("");
 	const [receiverChain, setReceiverChain] = useState("");
 	const [preference, setPreference] = useState([]);
-	const[correctAddress, setCorrectAddress] = useState("")
+	const [correctAddress, setCorrectAddress] = useState("")
+	const [ipfs, setIpfs] = useState("");
     const handleImageChange = (e:any) => {
         setImageSrc(URL.createObjectURL(e.target.files[0]));
     };
@@ -817,19 +815,10 @@ function sendNFTs() {
   blobImage
         );
         console.log(metadata);
-        const nftStorageLink = `https://${metadata}.ipfs.nftstorage.link`
-        console.log(nftStorageLink);
-           const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = await provider.getSigner();
-    const contract = new ethers.Contract(NFTaddress, nftAbi, signer);
-		const txn = await contract.setUri(nftStorageLink);
-		console.log("txn:", txn);
-
-		const crossminting = await 
-    await txn.wait();
-    console.log(txn);
+		const nftStorageLink = `https://${metadata}.ipfs.nftstorage.link`
+		setIpfs(nftStorageLink);
+		console.log(nftStorageLink);
+		window.alert("Successfully stored on NFT.Storage")
     //    https://bafkreieqpk2qh25xm2ei3z7ia4dxrmzrs3c2hmpw4d3dupy6kzbuv2f3w4.ipfs.nftstorage.link/
     }
 	async function mintNft() {
@@ -838,8 +827,8 @@ function sendNFTs() {
     const provider = new ethers.providers.Web3Provider(connection);
 		const signer = await provider.getSigner();
 		const contract = new ethers.Contract(sourceMinterAddress, sourceMinterAbi, signer);
-		const txn = await contract.mint("12532609583862916517", "0xCAfA35F8f34BdefE225F1dD05af86BFDc856AdfB", 0, correctAddress)
-		txn.wait();
+		const txn = await contract.mint("12532609583862916517", "0xf701D829de7ecD724f674C00fD714936Fa510ce8", 0, correctAddress,ipfs )
+		await txn.wait();
 		window.alert(`Check the transaction chainlink ccip explorer https://ccip.chain.link/msg/${txn}`)
 	}
 	async function checkAddress() {
@@ -901,7 +890,7 @@ function sendNFTs() {
 					<input type="text" placeholder="0x..." className="input input-bordered w-full max-w-xs" /> */}
 					
 					<div className="card-actions justify-end">
-						<button className="btn btn-neutral" > Upload to NFTStorage </button>
+						<button onClick={storeNft} className="btn btn-neutral" > Upload to NFTStorage </button>
 						{/* <button className="btn btn-neutral" onClick={() => (document.getElementById('my_modal_2') as HTMLDialogElement)?.showModal()}>Don't have an NFT contract already? Create one</button>
 						<dialog id="my_modal_2" className="modal">
   <div className="modal-box">

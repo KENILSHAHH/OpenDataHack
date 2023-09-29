@@ -43,18 +43,21 @@ const Home: React.FC<PageProps> = ({childComponent}) => {
     
     <div className="text-center">
       <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-        SpruceDao
+        MyNFTMyChain
       </h1>
-      <p className="mt-6 text-lg leading-8 text-gray-600">
-     Create Entry Gated Daos to provide specific features and benefits to the users constantly contributing to the DAO. 
+       <p className="mt-6 text-2xl leading-8 text-gray-600">
+     I have my SBT on ethereum, oh wait i forgot i will never spend this high, it must be on polygon, wait which address did i claim it on????, TF i dont remember, where is it!!!!!!!!!!
               </p>
-               <p className="mt-6 text-lg leading-8 text-gray-600">Join DAO by verifying your credentials using SpruceID</p>
+      <p className="mt-6 text-2xl leading-8 text-gray-600">
+   
+              </p>
+               <p className="mt-6 text-lg leading-8 text-gray-600">Well we've got you covered</p>
       <div className="mt-10 flex items-center justify-center gap-x-6">
         <a
           href="#"
           className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-        Create DAO
+        Set your preferences
         </a>
       
       </div>
